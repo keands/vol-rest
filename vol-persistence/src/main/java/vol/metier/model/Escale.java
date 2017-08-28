@@ -12,6 +12,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @IdClass(EscaleId.class)
 public class Escale {
@@ -66,6 +68,7 @@ public class Escale {
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "vol_id")
+	@JsonIgnore
 	public Vol getVol() {
 		return vol;
 	}

@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Version;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Aeroport {
 
@@ -32,7 +34,8 @@ public class Aeroport {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	@Size(min=1,max=99,message="Le Nom de l'aeroport est obligatoire!")
+
+	@Size(min = 1, max = 99, message = "Le Nom de l'aeroport est obligatoire!")
 	@Column(name = "nom", length = 100)
 	public String getNom() {
 		return nom;
@@ -42,6 +45,7 @@ public class Aeroport {
 		this.nom = nom;
 	}
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "aeroport", fetch = FetchType.EAGER)
 	public List<AeroportVille> getVilles() {
 		return villes;
@@ -76,6 +80,7 @@ public class Aeroport {
 		this.villes = villes;
 	}
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "aeroport", fetch = FetchType.EAGER)
 	public List<Escale> getEscales() {
 		return escales;
