@@ -108,7 +108,7 @@ public abstract class Client {
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
 	@JsonIgnore
 	public List<Reservation> getReservations() {
