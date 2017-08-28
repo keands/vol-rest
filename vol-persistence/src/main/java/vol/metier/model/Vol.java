@@ -94,7 +94,7 @@ public class Vol {
 	public void setHeureArrivee(Date heureArrivee) {
 		this.heureArrivee = heureArrivee;
 	}
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "vol", fetch = FetchType.EAGER)
 	public List<Escale> getEscales() {
 		return escales;
@@ -144,7 +144,7 @@ public class Vol {
 		this.reservations = reservations;
 	}
 	
-	
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER) //mappedBy was removed
     @IndexColumn(name="INDEX_COL")
 	//@OneToMany(mappedBy = "id.vol", fetch = FetchType.LAZY)

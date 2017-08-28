@@ -26,7 +26,6 @@ public class CompagnieAerienneVolId implements Serializable {
 	}
 
 	// (fetch = FetchType.EAGER)
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "vol_id")
 	public Vol getVol() {
