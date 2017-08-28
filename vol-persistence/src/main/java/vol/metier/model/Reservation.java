@@ -17,6 +17,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Reservation {
 
@@ -66,6 +68,7 @@ public class Reservation {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "passager_id")
+	
 	public Passager getPassager() {
 		return passager;
 	}
@@ -76,6 +79,7 @@ public class Reservation {
 	//(fetch = FetchType.EAGER)
 	@ManyToOne
 	@JoinColumn(name = "vol_id")
+	@JsonIgnore
 	public Vol getVol() {
 		return vol;
 	}
@@ -95,6 +99,7 @@ public class Reservation {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "client_id")
+	@JsonIgnore
 	public Client getClient() {
 		return client;
 	}
