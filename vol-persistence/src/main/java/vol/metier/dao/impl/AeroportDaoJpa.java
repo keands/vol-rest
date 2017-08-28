@@ -23,7 +23,7 @@ import vol.metier.model.Vol;
 @Repository
 public class AeroportDaoJpa implements AeroportDao {
 
-	@PersistenceContext 
+	@PersistenceContext
 	private EntityManager em;
 
 	@Autowired
@@ -33,17 +33,16 @@ public class AeroportDaoJpa implements AeroportDao {
 	private EscaleDao escaleDao;
 	@Autowired
 	private VolDao volDao;
-	
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public Aeroport find(Long id) {
 		return em.find(Aeroport.class, id);
 
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public Aeroport find(String name) {
 		Query query = em.createQuery("from Aeroport a where a.nom = :nom");
 		query.setParameter("nom", name);
@@ -52,7 +51,7 @@ public class AeroportDaoJpa implements AeroportDao {
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public List<Aeroport> findAll() {
 		Query query = em.createQuery("from Aeroport a");
 		return query.getResultList();
@@ -71,32 +70,24 @@ public class AeroportDaoJpa implements AeroportDao {
 
 	@Override
 	public void delete(Aeroport aeroport) {
-		System.out.println("etapa 1 delete en AeroportJpa");
-		em.merge(aeroport);
-		
-		//
-		List<Vol> LV = volDao.findAll();
-		for (int i = 0; i < LV.size(); i++) {
-			
-			if (LV.get(i).getDepart().equals(aeroport) || LV.get(i).getArrivee().equals(aeroport))
-			{System.out.println("ETAPA EN XXXXXX");
-				volDao.delete(volDao.find(LV.get(i).getId()));
-			}
+		aeroport = em.merge(aeroport);
+
+		List<Vol> vols = volDao.findAllByAeroport(aeroport);
+		for (Vol vol : vols) {
+			volDao.delete(vol);
 		}
-		 //
-		if(aeroport.getVilles().size()!=0){System.out.println("aeroport.getVilles().size()!=0 en AeroDaoJpa");
-			for (AeroportVille villeAeroport : aeroport.getVilles()) {System.out.println("etapa 2 delete en AeroportJpa");
+		//
+		if (aeroport.getVilles().size() != 0) {
+			for (AeroportVille villeAeroport : aeroport.getVilles()) {
 				aeroportVilleDao.delete(villeAeroport);
 			}
 		}
-		
-		for (Escale escale : aeroport.getEscales()) {System.out.println("etapa 3 delete en AeroportJpa");
+
+		for (Escale escale : aeroport.getEscales()) {
 			escaleDao.delete(escale);
 		}
-		System.out.println("etapa 4 antes remove en AeroportJpa");
-		em.remove(em.contains(aeroport) ? aeroport : em.merge(aeroport));
-		System.out.println("saliendo bien de AeroportJpa");
+		
+		em.remove(aeroport);
 	}
-
 
 }

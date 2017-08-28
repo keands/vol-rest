@@ -14,6 +14,7 @@ import vol.metier.dao.CompagnieAerienneVolDao;
 import vol.metier.dao.EscaleDao;
 import vol.metier.dao.ReservationDao;
 import vol.metier.dao.VolDao;
+import vol.metier.model.Aeroport;
 import vol.metier.model.CompagnieAerienneVol;
 import vol.metier.model.Escale;
 import vol.metier.model.Reservation;
@@ -44,6 +45,14 @@ public class VolDaoJpa implements VolDao {
 	@Transactional(readOnly = true)
 	public List<Vol> findAll() {
 		Query query = em.createQuery("from Vol v");
+		return query.getResultList();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Vol> findAllByAeroport(Aeroport aeroport) {
+		Query query = em.createQuery("from Vol v where v.depart = :aeroport or v.arrivee = :aeroport");
+		query.setParameter("aeroport", aeroport);
 		return query.getResultList();
 	}
 
