@@ -21,7 +21,6 @@ public class CompagnieAerienneVol {
 		this.id = new CompagnieAerienneVolId(compagnieAerienne,vol);
 	}
 	
-
 	@EmbeddedId
 	public CompagnieAerienneVolId getId() {
 		return id;
@@ -30,8 +29,6 @@ public class CompagnieAerienneVol {
 	public void setId(CompagnieAerienneVolId id) {
 		this.id = id;
 	}
-
-	
 
 	@Column(name="Numero", length=50)
 	public String getNumero() {

@@ -144,7 +144,7 @@ public class Vol {
 		this.reservations = reservations;
 	}
 	
-	
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER) //mappedBy was removed
     @IndexColumn(name="INDEX_COL")
 	//@OneToMany(mappedBy = "id.vol", fetch = FetchType.LAZY)
