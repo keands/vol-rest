@@ -80,7 +80,6 @@ public class Reservation {
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "vol_id")
-	@JsonIgnore
 	public Vol getVol() {
 		return vol;
 	}
