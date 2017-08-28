@@ -68,6 +68,7 @@ public class Reservation {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "passager_id")
+	
 	public Passager getPassager() {
 		return passager;
 	}
@@ -79,6 +80,7 @@ public class Reservation {
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "vol_id")
+	@JsonIgnore
 	public Vol getVol() {
 		return vol;
 	}
@@ -98,6 +100,7 @@ public class Reservation {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "client_id")
+	@JsonIgnore
 	public Client getClient() {
 		return client;
 	}

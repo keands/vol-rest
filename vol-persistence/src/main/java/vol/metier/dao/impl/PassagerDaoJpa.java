@@ -66,7 +66,7 @@ public class PassagerDaoJpa implements PassagerDao{
 
 	@Override
 	public void delete(Passager passager) {
-		em.refresh(passager);
+		passager = em.merge(passager);
 		for(Reservation resa : passager.getReservations()){
 			reservationDao.delete(resa);
 		}

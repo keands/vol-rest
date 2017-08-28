@@ -19,6 +19,8 @@ import javax.persistence.Version;
 import org.hibernate.annotations.IndexColumn;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Vol {
 
@@ -133,6 +135,7 @@ public class Vol {
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER) //mappedBy was removed
     @IndexColumn(name="INDEX_COL")
 	//@OneToMany(mappedBy = "vol", fetch = FetchType.EAGER)
+	@JsonIgnore
 	public List<Reservation> getReservations() {
 		return reservations;
 	}

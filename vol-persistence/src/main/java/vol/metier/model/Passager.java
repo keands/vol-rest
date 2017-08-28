@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Version;
 // tell her that you love her, if you really love her...
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Passager {
 
@@ -63,6 +65,7 @@ public class Passager {
 	}
 
 	@OneToMany(mappedBy = "passager", fetch = FetchType.LAZY)
+	@JsonIgnore
 	public List<Reservation> getReservations() {
 		return reservations;
 	}
