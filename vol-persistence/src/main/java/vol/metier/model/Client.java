@@ -19,6 +19,8 @@ import javax.persistence.Version;
 
 import org.hibernate.validator.constraints.Email;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", length = 15, discriminatorType = DiscriminatorType.STRING)
@@ -106,7 +108,7 @@ public abstract class Client {
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
 	public List<Reservation> getReservations() {
 		return reservations;

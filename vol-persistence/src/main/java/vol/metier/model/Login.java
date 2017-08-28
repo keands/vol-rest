@@ -9,6 +9,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Login")
 public class Login {
@@ -32,7 +34,7 @@ public class Login {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	@Column(name = "login", length = 50, unique = true)
 	public String getLogin() {
 		return login;
@@ -59,7 +61,7 @@ public class Login {
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
-
+	@JsonIgnore
 	@OneToOne(mappedBy = "login", fetch = FetchType.LAZY)
 	public Client getClient() {
 		return client;
