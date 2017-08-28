@@ -94,7 +94,7 @@ public class Vol {
 	public void setHeureArrivee(Date heureArrivee) {
 		this.heureArrivee = heureArrivee;
 	}
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "vol", fetch = FetchType.EAGER)
 	public List<Escale> getEscales() {
 		return escales;
