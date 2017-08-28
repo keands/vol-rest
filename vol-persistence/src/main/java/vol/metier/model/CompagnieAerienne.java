@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class CompagnieAerienne {
 
@@ -39,6 +41,7 @@ public class CompagnieAerienne {
 		this.nom = nom;
 	}
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "id.compagnieAerienne")
 	public List<CompagnieAerienneVol> getCompagniesAerienneVol() {
 		return compagniesAerienneVol;
@@ -56,5 +59,7 @@ public class CompagnieAerienne {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+	
+	
 
 }
